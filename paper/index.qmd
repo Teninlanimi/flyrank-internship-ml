@@ -1,6 +1,6 @@
 # Machine Learning for Content Refresh Prioritization
 
-A Client-Grouped Evaluation of SEO Content Opportunity Scoring
+### A Client-Grouped Evaluation of SEO Content Opportunity Scoring
 
 **Teninlanimi Olajide**  
 Machine Learning Intern, FlyRank  
@@ -9,14 +9,13 @@ August 25, 2026
 **Project repository:** [FlyRank ML Internship repository](https://github.com/flyrank-bih/flyrank-ml-internship-starter)  
 **Organization:** [FlyRank](https://flyrank.ai/)
 
-
 # Abstract
 
-This study investigates whether machine learning can improve the prioritization of existing web content for potential refresh by identifying observations associated with declining performance. Using a pseudonymized FlyRank SEO and web analytics dataset containing 30,000 content-level observations, the analysis combined search, content, freshness, engagement, and historical performance signals while excluding target-derived fields and pseudonymous identifiers from the predictive features. A rule-based baseline was compared with Logistic Regression, Decision Tree, and Random Forest models, with performance evaluated primarily using Precision@K under five-fold client-grouped cross-validation. Logistic Regression achieved the strongest mean Precision@20 of 0.83 across held-out client groups, compared with 0.43 for the repository baseline, while also showing relatively low variation across folds. The resulting model provides a ranked decision-support queue that can help content teams prioritize pages for human review rather than automatically deciding which pages should be refreshed.
+This study investigates whether machine learning can improve content-refresh prioritization within the FlyRank SEO content opportunity workflow by identifying existing pages associated with declining performance and ranking them for human review. Using a pseudonymized FlyRank SEO and web analytics dataset containing 30,000 content-level observations, the analysis combined search, content, freshness, engagement, and historical performance signals while excluding target-derived fields and pseudonymous identifiers from the predictive features. A rule-based baseline was compared with Logistic Regression, Decision Tree, and Random Forest models, with performance evaluated primarily using Precision@K under five-fold client-grouped cross-validation. Logistic Regression achieved the strongest mean Precision@20 of 0.83 across held-out client groups, compared with 0.43 for the repository baseline, while also showing relatively low variation across folds. The resulting model provides a ranked decision-support queue that can help content teams focus limited editorial review capacity on pages associated with potential refresh opportunities rather than automatically deciding which pages should be refreshed.
 
 # Introduction / Problem statement
 
-The objective of this project is to support content-refresh prioritization for SEO teams. Content teams may manage large numbers of web pages but have limited time and resources to review every page. The decision supported by this system is therefore: **which existing content items should be reviewed first for a potential refresh?**
+The objective of this project is to support the content-refresh prioritization problem represented by the FlyRank ML Internship refresh/content-opportunity lane. In a practical SEO workflow, content teams may manage large numbers of existing pages but have limited time and resources to investigate every page. The decision supported by this system is therefore: **which existing content items should be reviewed first for a potential refresh?**
 
 The unit of analysis is the **content item/page**. Each observation represents a content item described by its content characteristics, SEO signals, and historical search-performance signals.
 
