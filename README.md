@@ -1,3 +1,50 @@
+# Machine Learning for Content Refresh Prioritization
+
+**Which pages should an SEO team review first for a refresh?** During my Machine Learning Engineer internship at FlyRank AI (June–October 2026), I built a model that ranks existing pages by how likely they are to be in decline, so content teams can spend limited review time on the right pages first.
+
+**[Read the research paper](https://teninlanimi.github.io/flyrank-internship-ml/)** · Python · scikit-learn · Quarto
+
+## Results
+
+Each model was evaluated with **five-fold client-grouped cross-validation**: every fold tests on clients the model never saw in training, so the scores reflect performance on new websites. Ranking quality is measured with **Precision@K**, the share of the top K flagged pages that were actually declining. That matches how the output is used, since a team only works through the top of the queue.
+
+Mean Precision@K across the five held-out client groups (± standard deviation):
+
+| Model | Precision@20 | Precision@50 | Precision@100 |
+| --- | --- | --- | --- |
+| **Logistic Regression** | **0.83 ± 0.05** | **0.76 ± 0.09** | **0.74 ± 0.12** |
+| Random Forest | 0.76 ± 0.17 | 0.71 ± 0.16 | 0.71 ± 0.15 |
+| Decision Tree | 0.47 ± 0.35 | 0.51 ± 0.35 | 0.51 ± 0.33 |
+| Rule-based baseline | 0.43 ± 0.18 | 0.47 ± 0.17 | 0.47 ± 0.14 |
+
+The dataset has 30,000 pages, and 54.2% are declining, so a random queue would score about 0.54.
+
+### What the results show
+
+- **Logistic Regression is the recommended model.** It nearly doubles the baseline's Precision@20 (0.83 vs 0.43) and stays strongest at every queue size.
+- **It is also the most consistent.** Its Precision@20 varies by only ±0.05 across client groups, against ±0.17 for Random Forest and ±0.35 for the Decision Tree. That matters because a model that works well for some clients and poorly for others gives unreliable queues.
+- **The rule-based baseline performs below the 54% base rate,** which shows the hand-weighted heuristics were not capturing what actually signals decline.
+
+## Making the Evaluation Trustworthy
+
+- **Client-grouped validation over row-level validation.** An earlier row-level split gave Logistic Regression a Precision@20 of 0.90. I treated that as optimistic, because rows from the same client can appear in both training and test data, and based the final results on client-grouped folds instead.
+- **Leakage audit.** `trend_direction` and `trend_pct` describe the outcome directly, so they were excluded from the features. Client and content IDs were excluded too, and `client_id` was used only to build the validation folds.
+- **Baseline comparison.** Every model is judged against the repository's transparent rule-based score.
+
+## Intended Use
+
+The model is a **decision-support tool, not an automatic refresh system.** It produces a ranked queue, and an editor reviews each page's signals before deciding whether to refresh it, monitor it or leave it alone. The target is an observed declining trend, so a high score does not prove that refreshing the page will improve its performance.
+
+## Where to Find the Work
+
+- **Research paper:** [`paper/index.qmd`](paper/index.qmd), published at [teninlanimi.github.io/flyrank-internship-ml](https://teninlanimi.github.io/flyrank-internship-ml/)
+- **Final client-grouped evaluation:** [`work/notebooks/capstone.ipynb`](work/notebooks/capstone.ipynb)
+- **Weekly assignment notebooks:** [`work/notebooks/`](work/notebooks/), covering the research question, task framing, data contract, leakage check, signal audit, baseline, model, validation audit and action playbook
+
+---
+
+*The sections below are the original internship starter guide.*
+
 # FlyRank ML Internship — Starter Repo
 
 **Applied Search Intelligence: Google Search Ranking & Discoverability**
