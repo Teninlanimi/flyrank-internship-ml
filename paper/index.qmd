@@ -6,7 +6,7 @@
 Machine Learning Intern, FlyRank  
 August 25, 2026
 
-**Project repository:** [FlyRank ML Internship repository](https://github.com/flyrank-bih/flyrank-ml-internship-starter)  
+**Project repository:** [FlyRank ML Internship repository](https://github.com/Teninlanimi/flyrank-internship-ml)  
 **Organization:** [FlyRank](https://flyrank.ai/)
 
 # Abstract
